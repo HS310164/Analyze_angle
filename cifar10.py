@@ -10,6 +10,7 @@ def opt():
     args.add_argument('--seed', default=123456789, type=int, help='Random seed')
     args.add_argument('--save_image', action='store_true', help='If true, save images')
     args.add_argument('--num_image', default=2, type=int, help='The number of processing images')
+    args.add_argument('--visualize', action='store_true', help='If true, visualize images')
     arguments = args.parse_args()
     return arguments
 
@@ -34,14 +35,16 @@ def main(args):
     np.random.shuffle(targets)
     for pos, idx in enumerate(targets[:2]):
         print("image{}".format(pos + 1))
-        plt.subplot(1, 2, pos+1)
+        if args.visualize:
+            plt.subplot(1, 2, pos+1)
         img = data[idx]
         img = img.reshape(3, 32, 32).transpose(1, 2, 0)
         if args.save_image:
             save_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
             cv2.imwrite(save_img, 'img{}.jpg'.format(pos+1))
-        plt.imshow(img)
-        plt.axis('off')
+        if args.visualize:
+            plt.imshow(img)
+            plt.axis('off')
         hsv = cv2.cvtColor(img, cv2.COLOR_RGB2HSV)
         sum_sin = 0
         sum_cos = 0
@@ -64,7 +67,8 @@ def main(args):
         print("平均合成ベクトル長：", R)
         print("円周分散：", 1 - R)
         print("円周標準偏差：", -2 * (np.log(1 - R)))
-    plt.show()
+    if args.visualize:
+        plt.show()
 
 
 if __name__ == '__main__':
