@@ -41,7 +41,7 @@ def main(args):
         img = img.reshape(3, 32, 32).transpose(1, 2, 0)
         if args.save_image:
             save_img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-            cv2.imwrite(save_img, 'img{}.jpg'.format(pos+1))
+            cv2.imwrite('img{}.jpg'.format(pos+1), save_img)
         if args.visualize:
             plt.imshow(img)
             plt.axis('off')
