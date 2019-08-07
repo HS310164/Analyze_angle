@@ -39,5 +39,5 @@ python cifar10.py --seed 13 --num_image 5 --save_image --visualize
 ```
 
 ## Extra code
-`calc_cor.py` calculates the correlation coefficient of cherry blossoms in Tokyo and Sapporo.
+`calc_cor.py` calculates the correlation coefficient of the flowering date of cherry blossoms in Tokyo and Sapporo.
 
